@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>QuickCart Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A premium product listing dashboard built with Vanilla JS and Bootstrap 5.">
+
+    <!-- Core Google Fonts for premium typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <!-- Task 6 & 9: Responsive UI & Add to Cart Header -->
+    <nav class="navbar navbar-dark sticky-top">
+        <div class="container-fluid px-3">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor"
+                    class="bi bi-cart3 text-light" viewBox="0 0 16 16">
+                    <path
+                        d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+                </svg>
+                QuickCart
+            </a>
+            <div class="text-white cart-badge d-flex align-items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                    class="bi bi-cart-fill" viewBox="0 0 16 16">
+                    <path
+                        d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+                </svg>
+                <span>Cart (<span id="cartCount">0</span>)</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Filters & Controls Container -->
+    <div class="container mt-4">
+        <div class="row g-3 align-items-center bg-white p-3 rounded-4 shadow-sm border border-light">
+
+            <!-- Task 3: Search Functionality -->
+            <div class="col-md-5">
+                <div class="input-group">
+                    <span class="input-group-text bg-white border-end-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-search text-secondary" viewBox="0 0 16 16">
+                            <path
+                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                        </svg>
+                    </span>
+                    <input type="text" id="searchInput" class="form-control border-start-0 ps-0 shadow-none"
+                        placeholder="Search products by title or keywords...">
+                </div>
+            </div>
+
+            <!-- Task 2: Category Filter -->
+            <div class="col-md-4">
+                <select class="form-select bg-light border-0" id="categoryFilter" aria-label="Category Filter">
+                    <option value="all">All Categories</option>
+                </select>
+            </div>
+
+            <!-- Task 5: Sort Logic -->
+            <div class="col-md-3">
+                <select class="form-select bg-light border-0" id="sortFilter" aria-label="Sort Configuration">
+                    <option value="">Sort by Price</option>
+                    <option value="low">Low to High</option>
+                    <option value="high">High to Low</option>
+                </select>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Task 7: Loader State -->
+    <div id="loader">
+        <div class="spinner"></div>
+        <h5 class="text-secondary fw-light">Fetching Products...</h5>
+    </div>
+
+    <!-- Task 1: Fetch & Display Products -->
+    <div class="container mt-4 mb-5">
+        <div class="row g-4" id="productContainer" style="display: none;"></div>
+    </div>
+
+    <!-- Task 4: Product Detail Modal -->
+    <div class="modal fade" id="productModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title fw-bold" id="modalTitle"></h4>
+                    <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modalBody"></div>
+                <div class="modal-footer border-top-0 pt-0">
+                    <button type="button" class="btn btn-outline-secondary px-4 fw-normal"
+                        data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary px-4 shadow-sm"
+                        onclick="addToCart(); bootstrap.Modal.getInstance(document.getElementById('productModal')).hide()">Add
+                        to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Validation & Script -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- App logic separated successfully -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>

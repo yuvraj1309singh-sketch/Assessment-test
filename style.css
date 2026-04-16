@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap');
+
+body {
+    background-color: #f1f5f9;
+    font-family: 'Outfit', sans-serif;
+    color: #1e293b;
+}
+
+/* Premium Navbar */
+.navbar {
+    background: linear-gradient(135deg, #0f172a, #334155);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 1rem 2rem;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    font-size: 1.5rem;
+    color: white !important;
+}
+
+.cart-badge {
+    background-color: #3b82f6;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.4);
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+
+.cart-badge:hover {
+    transform: scale(1.05);
+}
+
+/* Controls (Filters/Search) */
+.form-control,
+.form-select {
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+    padding: 0.75rem 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+    transition: all 0.3s ease;
+}
+
+.form-control:focus,
+.form-select:focus,
+.input-group-text {
+    border-color: #3b82f6;
+}
+
+.form-control:focus {
+    box-shadow: none !important;
+}
+
+.input-group:focus-within {
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+    border-radius: 8px;
+}
+
+/* Product Cards */
+.card {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: #ffffff;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top-wrapper {
+    padding: 1.5rem;
+    background-color: #ffffff;
+    border-bottom: 1px solid #f8fafc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card img {
+    object-fit: contain;
+    height: 200px;
+    width: 100%;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.card-title {
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: #334155;
+    margin-bottom: 0.5rem;
+}
+
+.price-badge {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #10b981;
+}
+
+/* Buttons */
+.btn {
+    border-radius: 8px;
+    font-weight: 600;
+    padding: 0.6rem 1rem;
+    transition: all 0.2s;
+}
+
+.btn-primary {
+    background-color: #3b82f6;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #2563eb;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+}
+
+.btn-outline-primary {
+    border: 2px solid #3b82f6;
+    color: #3b82f6;
+}
+
+.btn-outline-primary:hover {
+    background-color: #3b82f6;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+}
+
+/* Loader */
+#loader {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #e2e8f0;
+    border-top-color: #3b82f6;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Modal */
+.modal-content {
+    border-radius: 16px;
+    border: none;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+    border-bottom: 1px solid #f1f5f9;
+    padding: 1.5rem;
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
